@@ -18,6 +18,9 @@ class OrderCreatePage:
         self._input_start_date.fill(start_date)
         self._input_end_date.fill(end_date)
         self._create_button.click()
+        from tests.ui_tests.pages.devg_page import DevgPage
+        return DevgPage(self._page)
+
 
 
 

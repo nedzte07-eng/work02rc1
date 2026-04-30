@@ -30,6 +30,9 @@ def test_create_order(page):
     order_create_page = order_page.create_button_click()
     expect(order_create_page.get_title()).to_contain_text("New Order")
 
+    devg_page = order_create_page.create_gvv_with_2_adults('2026-07-20', '2026-07-25')
+    expect(devg_page.get_title()).to_contain_text("DEVG")
+
 
 
 
