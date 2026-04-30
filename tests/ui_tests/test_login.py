@@ -16,3 +16,4 @@ def test_login_page(page):
 
     expect(admin.get_logo()).to_contain_text("Orion")
 
+

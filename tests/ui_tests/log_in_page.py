@@ -20,7 +20,7 @@ class LogInPage:
         self.page.goto(self._ui_url)
         return self
 
-    def login_button(self):
+    def login_button_click(self):
         self._login.click()
         from tests.ui_tests.admin import AdminPage
         return AdminPage(self.page)
@@ -36,4 +36,4 @@ class LogInPage:
     def login(self, email: str, password: str):
         self.enter_email(email)
         self.enter_password(password)
-        return self.login_button()
+        return self.login_button_click()
