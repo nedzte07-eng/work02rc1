@@ -27,6 +27,9 @@ def test_create_order(page):
 
     expect(order_page.get_title()).to_contain_text("Order")
 
+    order_create_page = order_page.create_button_click()
+    expect(order_create_page.get_title()).to_contain_text("New Order")
+
 
 
 
