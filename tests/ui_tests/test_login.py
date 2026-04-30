@@ -1,7 +1,7 @@
 import os
 
 from playwright.sync_api import expect
-from tests.ui_tests.log_in_page import LogInPage
+from tests.ui_tests.pages.log_in_page import LogInPage
 
 UI_URL = os.getenv('RC1_ORION')
 RC1_ORION_EMAIL = os.getenv('RC1_ORION_EMAIL')
@@ -15,5 +15,21 @@ def test_login_page(page):
     admin = login.navigate().login(RC1_ORION_EMAIL, RC1_ORION_PASSWORD)
 
     expect(admin.get_logo()).to_contain_text("Orion")
+
+def test_create_order(page):
+    login = LogInPage(page)
+
+    admin_page = login.navigate().login(RC1_ORION_EMAIL, RC1_ORION_PASSWORD)
+
+    expect(admin_page.get_logo()).to_contain_text("Orion")
+
+    order_page = admin_page.order_link_click()
+
+    expect(order_page.get_title()).to_contain_text("Order")
+
+    order_create_page = order_page.create_button_click()
+    expect(order_create_page.get_title()).to_contain_text("New Order")
+
+
 
 
