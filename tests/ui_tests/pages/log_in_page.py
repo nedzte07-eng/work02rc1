@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page
 
 load_dotenv()
 
@@ -22,7 +22,7 @@ class LogInPage:
 
     def login_button_click(self):
         self._login.click()
-        from tests.ui_tests.admin import AdminPage
+        from tests.ui_tests.pages.admin import AdminPage
         return AdminPage(self.page)
 
     def enter_email(self, email: str):
