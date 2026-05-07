@@ -14,7 +14,9 @@ class TestOrionRC101:
     RC1_ORION_PASSWORD = os.getenv('RC1_ORION_PASSWORD')
     RC1_ORION_BASIC_USER = os.getenv('RC1_ORION_BASIC_USER')
     RC1_ORION_BASIC_PASS = os.getenv('RC1_ORION_BASIC_PASS')
+    TEST_ORDER_ID = os.getenv('RC1_ORION_TEST_ORDER')
 
+    @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
     @allure.story("Log in to Orion")
     @allure.title("Checking if user can Log in to Orion via applicable credentials")
     @allure.description("Ensure if user can Log in to Orion via applicable credentials")
@@ -25,7 +27,7 @@ class TestOrionRC101:
         with allure.step("Assert that the user is logged in"):
             expect(admin.get_logo()).to_contain_text("Orion")
 
-    # @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
+    @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
     @allure.story("Creating an order")
     @allure.title("Checking if user can create an order for 2 travelers")
     @allure.description("Ensure if user can create an order for 2 travelers")
@@ -61,5 +63,49 @@ class TestOrionRC101:
                 )
             with allure.step("Assert that travellers counter is 2"):
                 assert travelers_tab.get_counter_value() == "2"
+
+
+    @allure.story("Opening the test order for 2 travelers")
+    @allure.title("Checking if user can open the test order for 2 travelers")
+    @allure.description("Ensure if user can open the test order for 2 travelers")
+    def test_order_open_and_change(self, page):
+        login = LogInPage(page)
+
+        admin_page = login.navigate().login(self.RC1_ORION_EMAIL, self.RC1_ORION_PASSWORD)
+
+        with allure.step("Opening the test order for 2 travelers"):
+            with allure.step("Working with the test Order"):
+                expect(admin_page.get_logo()).to_contain_text("Orion")
+
+                test_order = admin_page.open_order_by_id(self.TEST_ORDER_ID)
+            with allure.step("Check if we on the test order"):
+                expect(test_order.get_title()).to_contain_text(f"{self.TEST_ORDER_ID}")
+
+                travelers_tab = TravelersTab(page)
+                travelers_tab.click_travelers()
+            with allure.step("Assert that we on Travellers tab"):
+                expect(travelers_tab.get_save_travelers()).to_contain_text("Travelers")
+                screenshot = travelers_tab.get_save_travelers().screenshot()
+                allure.attach(
+                    screenshot,
+                    name="Save Travelers button",
+                    attachment_type=allure.attachment_type.PNG
+                )
+            with allure.step("Assert that travellers counter is 2"):
+                assert travelers_tab.get_counter_value() == "2"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

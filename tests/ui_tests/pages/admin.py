@@ -15,6 +15,13 @@ class AdminPage:
         from tests.ui_tests.pages.order import OrderPage
         return OrderPage(self._page)
 
+    def open_order_by_id(self, order_id: str):
+        self._page.goto(f"/admin/order/{order_id}")
+        from tests.ui_tests.pages.devg_page import DevgPage
+        return DevgPage(self._page)
+
+
+
 
 
 

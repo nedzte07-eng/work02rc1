@@ -14,6 +14,10 @@ class OrderPage:
         from tests.ui_tests.pages.order_create import OrderCreatePage
         return OrderCreatePage(self._page)
 
+    def open_order_by_id(self, order_id: str):
+        self._page.goto(f"http://rc1-orion.test.greatvaluevacations.com/admin/order/{order_id}")
+        return DevgPage(self._page)
+
 
 
 
