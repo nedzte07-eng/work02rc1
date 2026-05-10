@@ -16,14 +16,3 @@ class DevgPage:
     def get_save_travelers(self):
         return self._save_travelers
 
-class TravelersTab(DevgPage):
-    def __init__(self, page: Page):
-        super().__init__(page)
-        self._counter = page.locator('a.nav-link[href="#travelers"] span.order-edit__counter')
-
-    def get_counter_value(self):
-        return self._counter.inner_text()
-
-    def save_travelers(self):
-        self._save_travelers.click()
-

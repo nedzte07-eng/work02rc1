@@ -3,7 +3,7 @@ import pytest
 import allure
 from playwright.sync_api import expect
 
-from tests.ui_tests.pages.devg_page import TravelersTab
+from tests.ui_tests.pages.order_tabs.travelers import TravelersTab
 from tests.ui_tests.pages.log_in_page import LogInPage
 
 
@@ -83,16 +83,20 @@ class TestOrionRC101:
 
                 travelers_tab = TravelersTab(page)
                 travelers_tab.click_travelers()
+                travelers_tab.set_2_adults()
             with allure.step("Assert that we on Travellers tab"):
                 expect(travelers_tab.get_save_travelers()).to_contain_text("Travelers")
-                screenshot = travelers_tab.get_save_travelers().screenshot()
+                # screenshot = travelers_tab.get_save_travelers().screenshot()
+                screenshot = page.screenshot()
                 allure.attach(
                     screenshot,
-                    name="Save Travelers button",
+                    name="Travellers tab",
                     attachment_type=allure.attachment_type.PNG
                 )
             with allure.step("Assert that travellers counter is 2"):
                 assert travelers_tab.get_counter_value() == "2"
+
+
 
 
 
