@@ -5,6 +5,7 @@ class DevgPage:
         self._page = page
         self._title = page.locator('h4.page-title')
         self._travelers = page.locator('a.nav-link[href="#travelers"]')
+        self._itinerary = page.locator('a.nav-link[href="#itinerary"]')
         self._save_travelers = page.get_by_role("button", name="Save Travelers")
 
     def get_title(self):
@@ -16,3 +17,5 @@ class DevgPage:
     def get_save_travelers(self):
         return self._save_travelers
 
+    def click_itinerary(self):
+        self._itinerary.click()

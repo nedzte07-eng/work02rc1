@@ -3,6 +3,7 @@ import pytest
 import allure
 from playwright.sync_api import expect
 
+from tests.ui_tests.pages.order_tabs.itinerary import ItineraryTab
 from tests.ui_tests.pages.order_tabs.travelers import TravelersTab
 from tests.ui_tests.pages.log_in_page import LogInPage
 
@@ -64,7 +65,6 @@ class TestOrionRC101:
             with allure.step("Assert that travellers counter is 2"):
                 assert travelers_tab.get_counter_value() == "2"
 
-
     @allure.story("Opening the test order for 2 travelers")
     @allure.title("Checking if user can open the test order for 2 travelers")
     @allure.description("Ensure if user can open the test order for 2 travelers")
@@ -77,39 +77,44 @@ class TestOrionRC101:
             with allure.step("Working with the test Order"):
                 expect(admin_page.get_logo()).to_contain_text("Orion")
 
-                test_order = admin_page.open_order_by_id(self.TEST_ORDER_ID)
+            test_order = admin_page.open_order_by_id(self.TEST_ORDER_ID)
             with allure.step("Check if we on the test order"):
                 expect(test_order.get_title()).to_contain_text(f"{self.TEST_ORDER_ID}")
 
-                travelers_tab = TravelersTab(page)
-                travelers_tab.click_travelers()
-                travelers_tab.set_2_adults()
+            travelers_tab = TravelersTab(page)
+            travelers_tab.click_travelers()
+            travelers_tab.set_2_adults()
             with allure.step("Assert that we on Travellers tab"):
                 expect(travelers_tab.get_save_travelers()).to_contain_text("Travelers")
                 # screenshot = travelers_tab.get_save_travelers().screenshot()
-                screenshot = page.screenshot()
+                screenshot_travelers_tab = page.screenshot()
                 allure.attach(
-                    screenshot,
+                    screenshot_travelers_tab,
                     name="Travellers tab",
                     attachment_type=allure.attachment_type.PNG
                 )
             with allure.step("Assert that travellers counter is 2"):
                 assert travelers_tab.get_counter_value() == "2"
 
+            itinerary_tab = ItineraryTab(page)
+            itinerary_tab.click_itinerary()
 
+            with allure.step("Assert that we on Itinerary tab"):
+                assert itinerary_tab.is_button_add_service_present() == True
+                screenshot_itinerary_tab = page.screenshot()
+                allure.attach(
+                    screenshot_itinerary_tab,
+                    name="Itinerary tab",
+                    attachment_type=allure.attachment_type.PNG
+                )
 
+            itinerary_tab.button_add_service_click()
+            with allure.step("Assert that we on Add Service modal"):
+                assert itinerary_tab.is_modal_add_service_title_present() == True
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                screenshot_add_service_modal = itinerary_tab.get_modal_add_service().screenshot()
+                allure.attach(
+                    screenshot_add_service_modal,
+                    name="Add Service modal",
+                    attachment_type=allure.attachment_type.PNG
+                )

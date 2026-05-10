@@ -1,5 +1,8 @@
 from playwright.sync_api import Page
 
+from tests.ui_tests.pages.devg_page import DevgPage
+
+
 class OrderPage:
     def __init__(self, page:Page):
         self._page = page
