@@ -38,8 +38,14 @@ class TravelersTab(DevgPage):
         self._save_travelers.click()
 
     def set_2_adults(self):
+        self._prefix_01.select_option('Mr')
         self._first_name_01.fill('Tom')
         self._last_name_01.fill('Seaver')
+        self._date_of_birth_01.fill('01 Jan 1991')
+        self._gender_01.select_option('M')
 
+        self._prefix_01.select_option('Ms')
         self._first_name_02.fill('Emma')
         self._last_name_02.fill('Jonson')
+        self._date_of_birth_02.fill('01 Jan 1992')
+        self._gender_02.select_option("F")
