@@ -24,4 +24,6 @@ class ItineraryTab(DevgPage):
     def get_modal_add_service(self):
         return self._modal_add_service
 
+    def quote_a_service(self):
+        self._modal_add_service_title.click()
 
