@@ -118,3 +118,6 @@ class TestOrionRC101:
                     name="Add Service modal",
                     attachment_type=allure.attachment_type.PNG
                 )
+
+            #___________
+            itinerary_tab.quote_an_accommodation_service()
