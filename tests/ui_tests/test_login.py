@@ -119,5 +119,11 @@ class TestOrionRC101:
                     attachment_type=allure.attachment_type.PNG
                 )
 
-            #___________
-            itinerary_tab.quote_an_accommodation_service()
+            with allure.step("Select and quote and delete an accommodation"):
+                itinerary_tab.quote_an_accommodation_service()
+                screenshot_quote_accommodation = page.screenshot()
+                allure.attach(
+                    screenshot_quote_accommodation,
+                    name="Quote an accommodation service",
+                    attachment_type=allure.attachment_type.PNG
+                )

@@ -1,6 +1,6 @@
 import re
 
-from playwright.sync_api import Page, expect
+from playwright.sync_api import Page, expect, Dialog
 from tests.ui_tests.pages.devg_page import DevgPage
 
 class ItineraryTab(DevgPage):
@@ -45,9 +45,21 @@ class ItineraryTab(DevgPage):
 
         self._page.get_by_role("button").filter(has_text=re.compile(r"^$")).click()
         self._page.get_by_text("The Alex Hotel").click()
-        self._page.get_by_role("button", name="Quote").click()
 
         self._page.on("dialog", lambda dialog: dialog.accept())
+        self._page.locator("button.btn-warning.btn-block").click()
+
+        self._page.get_by_role("button", name="Close").click()
+
+        self._page.get_by_role("button", name="Show").click()
+
+        self._page.on("dialog", lambda dialog: dialog.accept())
+        self._page.get_by_role("button", name="Delete Service").click()
+
+
+
+        self._page.wait_for_timeout(1000)
+
 
 
 
