@@ -2,6 +2,8 @@ from playwright.sync_api import Page
 from tests.ui_tests.pages.devg_page import DevgPage
 import json
 from pathlib import Path
+from typing import List
+from pydantic import BaseModel, Field
 
 
 def load_travelers():
@@ -9,9 +11,21 @@ def load_travelers():
     json_path = Path(__file__).resolve().parent.parent.parent / "test_data" / "travelers.json"
 
     with open(json_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    return data["travelers"]
+        raw_data = json.load(f)
 
+    # створюємо Pydantic-об’єкт
+    data = TravelersData(**raw_data)
+    return data.travelers
+
+class Traveler(BaseModel):
+    prefix: str
+    first_name: str
+    last_name: str
+    date_of_birth: str = Field(..., description="Format: DD MMM YYYY")
+    gender: str
+
+class TravelersData(BaseModel):
+    travelers: List[Traveler]
 
 class TravelersTab(DevgPage):
     def __init__(self, page: Page):
@@ -49,23 +63,29 @@ class TravelersTab(DevgPage):
         self._save_travelers.click()
 
     def set_2_adults(self):
+
+
         travelers = load_travelers()
-        self._prefix_01.select_option(travelers[0]['prefix'])
-        self._first_name_01.fill(travelers[0]['first_name'])
-        self._last_name_01.fill(travelers[0]['last_name'])
+
+        first_traveler = travelers[0]
+        self._prefix_01.select_option(first_traveler.prefix)
+        self._first_name_01.fill(first_traveler.first_name)
+        self._last_name_01.fill(first_traveler.last_name)
         self._date_of_birth_01.click()
         self._date_of_birth_01.clear()
-        self._date_of_birth_01.type(travelers[0]['date_of_birth'])
+        self._date_of_birth_01.type(first_traveler.date_of_birth)
         self._date_of_birth_02.press('Enter')
-        self._gender_01.select_option(travelers[0]['gender'])
+        self._gender_01.select_option(first_traveler.gender)
 
-        self._prefix_02.select_option(travelers[1]['prefix'])
-        self._first_name_02.fill(travelers[1]['first_name'])
-        self._last_name_02.fill(travelers[1]['last_name'])
+
+        second_traveler = travelers[1]
+        self._prefix_02.select_option(second_traveler.prefix)
+        self._first_name_02.fill(second_traveler.first_name)
+        self._last_name_02.fill(second_traveler.last_name)
         self._date_of_birth_02.click()
         self._date_of_birth_02.clear()
-        self._date_of_birth_02.type(travelers[1]['date_of_birth'])
+        self._date_of_birth_02.type(second_traveler.date_of_birth)
         self._date_of_birth_02.press('Enter')
-        self._gender_02.select_option(travelers[1]['gender'])
+        self._gender_02.select_option(second_traveler.gender)
 
 
