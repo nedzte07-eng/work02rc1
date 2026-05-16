@@ -1,5 +1,16 @@
 from playwright.sync_api import Page
 from tests.ui_tests.pages.devg_page import DevgPage
+import json
+from pathlib import Path
+
+
+def load_travelers():
+
+    json_path = Path(__file__).resolve().parent.parent.parent / "test_data" / "travelers.json"
+
+    with open(json_path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    return data["travelers"]
 
 
 class TravelersTab(DevgPage):
@@ -38,20 +49,23 @@ class TravelersTab(DevgPage):
         self._save_travelers.click()
 
     def set_2_adults(self):
-        self._prefix_01.select_option('Mr')
-        self._first_name_01.fill('Tom')
-        self._last_name_01.fill('Seaver')
+        travelers = load_travelers()
+        self._prefix_01.select_option(travelers[0]['prefix'])
+        self._first_name_01.fill(travelers[0]['first_name'])
+        self._last_name_01.fill(travelers[0]['last_name'])
         self._date_of_birth_01.click()
         self._date_of_birth_01.clear()
-        self._date_of_birth_01.type('01 Jan 1991')
+        self._date_of_birth_01.type(travelers[0]['date_of_birth'])
         self._date_of_birth_02.press('Enter')
-        self._gender_01.select_option('M')
+        self._gender_01.select_option(travelers[0]['gender'])
 
-        self._prefix_02.select_option('Ms')
-        self._first_name_02.fill('Emma')
-        self._last_name_02.fill('Jonson')
+        self._prefix_02.select_option(travelers[1]['prefix'])
+        self._first_name_02.fill(travelers[1]['first_name'])
+        self._last_name_02.fill(travelers[1]['last_name'])
         self._date_of_birth_02.click()
         self._date_of_birth_02.clear()
-        self._date_of_birth_02.type('01 Jan 1992')
+        self._date_of_birth_02.type(travelers[1]['date_of_birth'])
         self._date_of_birth_02.press('Enter')
-        self._gender_02.select_option('F')
+        self._gender_02.select_option(travelers[1]['gender'])
+
+

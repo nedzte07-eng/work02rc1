@@ -1,0 +1,46 @@
+{
+  "travelers": [
+    {
+      "prefix": "Mr",
+      "first_name": "Tom",
+      "last_name": "Seaver",
+      "date_of_birth": "01 Jan 1991",
+      "gender": "M"
+    },
+    {
+      "prefix": "Ms",
+      "first_name": "Emma",
+      "last_name": "Seaver",
+      "date_of_birth": "01 Jan 1992",
+      "gender": "F"
+    },
+    {
+      "prefix": "Mr",
+      "first_name": "David",
+      "last_name": "Seaver",
+      "date_of_birth": "01 Jan 1993",
+      "gender": "M"
+    },
+    {
+      "prefix": "Ms",
+      "first_name": "Sofy",
+      "last_name": "Seaver",
+      "date_of_birth": "01 Jan 1994",
+      "gender": "F"
+    },
+    {
+      "prefix": "Mr",
+      "first_name": "Garry",
+      "last_name": "Seaver",
+      "date_of_birth": "01 Jan 2019",
+      "gender": "M"
+    },
+    {
+      "prefix": "Ms",
+      "first_name": "Jinger",
+      "last_name": "Seaver",
+      "date_of_birth": "01 Jan 2024",
+      "gender": "F"
+    }
+  ]
+}
