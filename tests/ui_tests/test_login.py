@@ -28,11 +28,12 @@ class TestOrionRC101:
         with allure.step("Assert that the user is logged in"):
             expect(admin.get_logo()).to_contain_text("Orion")
 
-    @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
+    # @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
+    @pytest.mark.two_adults
     @allure.story("Creating an order")
     @allure.title("Checking if user can create an order for 2 travelers")
     @allure.description("Ensure if user can create an order for 2 travelers")
-    def test_create_order(self, page):
+    def test_create_order_two_adults(self, page):
         login = LogInPage(page)
 
         admin_page = login.navigate().login(self.RC1_ORION_EMAIL, self.RC1_ORION_PASSWORD)
@@ -67,11 +68,12 @@ class TestOrionRC101:
             with allure.step("Assert that travellers counter is 2"):
                 assert travelers_tab.get_counter_value() == "2"
 
-    @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
+    # @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
+    @pytest.mark.four_adults
     @allure.story("Creating an order")
     @allure.title("Checking if user can create an order for 4 travelers")
     @allure.description("Ensure if user can create an order for 4 travelers")
-    def test_create_order(self, page):
+    def test_create_order_four_adults(self, page):
         login = LogInPage(page)
 
         admin_page = login.navigate().login(self.RC1_ORION_EMAIL, self.RC1_ORION_PASSWORD)
@@ -107,10 +109,11 @@ class TestOrionRC101:
                 assert travelers_tab.get_counter_value() == "4"
 
     # @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
+    @pytest.mark.two_adults_two_children
     @allure.story("Creating an order")
     @allure.title("Checking if user can create an order for 2 adults and 2 children")
     @allure.description("Ensure if user can create an order for 2 adults and 2 children")
-    def test_create_order(self, page):
+    def test_create_order_two_adults_two_children(self, page):
         login = LogInPage(page)
 
         admin_page = login.navigate().login(self.RC1_ORION_EMAIL, self.RC1_ORION_PASSWORD)
@@ -145,7 +148,7 @@ class TestOrionRC101:
             with allure.step("Assert that travellers counter is 4"):
                 assert travelers_tab.get_counter_value() == "4"
 
-    @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
+    # @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
     @allure.story("Opening the test order for 2 travelers")
     @allure.title("Checking if user can open the test order for 2 travelers")
     @allure.description("Ensure if user can open the test order for 2 travelers")

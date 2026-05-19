@@ -38,7 +38,3 @@ class OrderCreatePage:
         from tests.ui_tests.pages.devg_page import DevgPage
         return DevgPage(self._page)
 
-
-
-
-
