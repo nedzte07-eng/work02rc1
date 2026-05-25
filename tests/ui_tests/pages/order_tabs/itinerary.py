@@ -10,6 +10,7 @@ class ItineraryTab(DevgPage):
         self._button_add_service = page.get_by_role("button", name="Add Service")
         self._modal_add_service = page.locator("div.modal-content").nth(1)
         self._modal_add_service_title = page.locator('div.m-0.modal-title.h4')
+        self._delete_service_notification = page.locator('//div[contains(@class,"Toastify__toast-body")]')
 
 
     def is_button_add_service_present(self):
@@ -25,6 +26,9 @@ class ItineraryTab(DevgPage):
 
     def get_modal_add_service(self):
         return self._modal_add_service
+
+    def get_delete_service_notification(self):
+        return self._delete_service_notification
 
     def quote_an_accommodation_service(self):
 
@@ -55,8 +59,6 @@ class ItineraryTab(DevgPage):
 
         self._page.on("dialog", lambda dialog: dialog.accept())
         self._page.get_by_role("button", name="Delete Service").click()
-
-
 
         self._page.wait_for_timeout(1000)
 

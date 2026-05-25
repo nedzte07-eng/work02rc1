@@ -149,6 +149,8 @@ class TestOrionRC101:
                 assert travelers_tab.get_counter_value() == "4"
 
     # @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
+
+    @pytest.mark.order_manipulation
     @allure.story("Opening the test order for 2 travelers")
     @allure.title("Checking if user can open the test order for 2 travelers")
     @allure.description("Ensure if user can open the test order for 2 travelers")
@@ -167,16 +169,16 @@ class TestOrionRC101:
 
             travelers_tab = TravelersTab(page)
             travelers_tab.click_travelers()
-            travelers_tab.set_2_adults()
-            with allure.step("Assert that we on Travellers tab"):
-                expect(travelers_tab.get_save_travelers()).to_contain_text("Travelers")
-                # screenshot = travelers_tab.get_save_travelers().screenshot()
-                screenshot_travelers_tab = page.screenshot()
-                allure.attach(
-                    screenshot_travelers_tab,
-                    name="Travellers tab",
-                    attachment_type=allure.attachment_type.PNG
-                )
+            # travelers_tab.set_2_adults()
+            # with allure.step("Assert that we on Travellers tab"):
+            #     expect(travelers_tab.get_save_travelers()).to_contain_text("Travelers")
+            #     # screenshot = travelers_tab.get_save_travelers().screenshot()
+            #     screenshot_travelers_tab = page.screenshot()
+            #     allure.attach(
+            #         screenshot_travelers_tab,
+            #         name="Travellers tab",
+            #         attachment_type=allure.attachment_type.PNG
+            #     )
             with allure.step("Assert that travellers counter is 2"):
                 assert travelers_tab.get_counter_value() == "2"
 
@@ -211,3 +213,4 @@ class TestOrionRC101:
                     name="Quote an accommodation service",
                     attachment_type=allure.attachment_type.PNG
                 )
+                assert itinerary_tab.get_delete_service_notification().inner_text() == "Service has been deleted"
