@@ -205,12 +205,18 @@ class TestOrionRC101:
                     attachment_type=allure.attachment_type.PNG
                 )
 
-            with allure.step("Select and quote and delete an accommodation"):
-                itinerary_tab.quote_an_accommodation_service()
+            with allure.step("Select and quote an accommodation"):
+                modal_sell = itinerary_tab.quote_an_accommodation_service()
                 screenshot_quote_accommodation = page.screenshot()
                 allure.attach(
                     screenshot_quote_accommodation,
                     name="Quote an accommodation service",
                     attachment_type=allure.attachment_type.PNG
                 )
+
+            with allure.step("Verify if modal sell and sell of the quoted service are the same"):
+                assert modal_sell == itinerary_tab.get_quoted_accommodation_sell()
+
+            with allure.step("Delete an accommodation"):
+                itinerary_tab.delete_quoted_accommodation_service()
                 assert itinerary_tab.get_delete_service_notification().inner_text() == "Service has been deleted"
