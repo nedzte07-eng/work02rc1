@@ -38,3 +38,12 @@ class OrderCreatePage:
         from tests.ui_tests.pages.devg_page import DevgPage
         return DevgPage(self._page)
 
+    def create_gvv_with_4_adults_2_children(self, start_date: str, end_date: str):
+        self._number_of_adults.fill('4')
+        self._number_of_children.fill('2')
+        self._input_start_date.fill(start_date)
+        self._input_end_date.fill(end_date)
+        self._create_button.click()
+        from tests.ui_tests.pages.devg_page import DevgPage
+        return DevgPage(self._page)
+

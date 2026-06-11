@@ -96,6 +96,26 @@ class TravelersTab(DevgPage):
         self._date_of_birth_06 = page.locator('//tbody/tr[4]/td[7]//input[@placeholder="DD M YYYY"]')
         self._gender_06 = page.locator('//tbody/tr[4]/td[9]//select[contains(@class,"traveler__select--gender")]')
 
+        # FIRST CHILD_FOR_FOUR_ADULTS
+        self._radio_07 = page.locator('//tbody/tr[5]/td[1]//input[@type="radio"]')
+        self._prefix_07 = page.locator('//tbody/tr[5]/td[2]//select[contains(@class,"traveler__select--prefix")]')
+        self._first_name_07 = page.locator('//tbody/tr[5]/td[3]//input[@class="form-control traveler__name-input"]')
+        self._middle_name_07 = page.locator('//tbody/tr[5]/td[4]//input[@class="form-control traveler__name-input"]')
+        self._last_name_07 = page.locator(
+            '//tbody/tr[5]/td[5]//input[@class="form-control traveler__name-input" and @value="Child five"]')
+        self._date_of_birth_07 = page.locator('//tbody/tr[5]/td[7]//input[@placeholder="DD M YYYY"]')
+        self._gender_07 = page.locator('//tbody/tr[5]/td[9]//select[contains(@class,"traveler__select--gender")]')
+
+        # SECOND CHILD_FOR_FOUR_ADULTS
+        self._radio_08 = page.locator('//tbody/tr[6]/td[1]//input[@type="radio"]')
+        self._prefix_08 = page.locator('//tbody/tr[6]/td[2]//select[contains(@class,"traveler__select--prefix")]')
+        self._first_name_08 = page.locator('//tbody/tr[6]/td[3]//input[@class="form-control traveler__name-input"]')
+        self._middle_name_08 = page.locator('//tbody/tr[6]/td[4]//input[@class="form-control traveler__name-input"]')
+        self._last_name_08 = page.locator(
+            '//tbody/tr[6]/td[5]//input[@class="form-control traveler__name-input" and @value="Child six"]')
+        self._date_of_birth_08 = page.locator('//tbody/tr[6]/td[7]//input[@placeholder="DD M YYYY"]')
+        self._gender_08 = page.locator('//tbody/tr[6]/td[9]//select[contains(@class,"traveler__select--gender")]')
+
 
 
 
@@ -224,6 +244,73 @@ class TravelersTab(DevgPage):
         self._date_of_birth_06.type(fourth_traveler.date_of_birth)
         self._date_of_birth_06.press('Enter')
         self._gender_06.select_option(fourth_traveler.gender)
+
+        self._page.get_by_role("button", name="Save Travelers").click()
+
+    def set_4_adults_2_children(self):
+
+        travelers = load_travelers()
+
+        first_traveler = travelers[0]
+        self._prefix_01.select_option(first_traveler.prefix)
+        self._first_name_01.fill(first_traveler.first_name)
+        self._last_name_01.fill(first_traveler.last_name)
+        self._date_of_birth_01.click()
+        self._date_of_birth_01.clear()
+        self._date_of_birth_01.type(first_traveler.date_of_birth)
+        self._date_of_birth_02.press('Enter')
+        self._gender_01.select_option(first_traveler.gender)
+
+
+        second_traveler = travelers[1]
+        self._prefix_02.select_option(second_traveler.prefix)
+        self._first_name_02.fill(second_traveler.first_name)
+        self._last_name_02.fill(second_traveler.last_name)
+        self._date_of_birth_02.click()
+        self._date_of_birth_02.clear()
+        self._date_of_birth_02.type(second_traveler.date_of_birth)
+        self._date_of_birth_02.press('Enter')
+        self._gender_02.select_option(second_traveler.gender)
+
+        third_traveler = travelers[2]
+        self._prefix_03.select_option(third_traveler.prefix)
+        self._first_name_03.fill(third_traveler.first_name)
+        self._last_name_03.fill(third_traveler.last_name)
+        self._date_of_birth_03.click()
+        self._date_of_birth_03.clear()
+        self._date_of_birth_03.type(third_traveler.date_of_birth)
+        self._date_of_birth_03.press('Enter')
+        self._gender_03.select_option(third_traveler.gender)
+
+        fourth_traveler = travelers[3]
+        self._prefix_04.select_option(fourth_traveler.prefix)
+        self._first_name_04.fill(fourth_traveler.first_name)
+        self._last_name_04.fill(fourth_traveler.last_name)
+        self._date_of_birth_04.click()
+        self._date_of_birth_04.clear()
+        self._date_of_birth_04.type(fourth_traveler.date_of_birth)
+        self._date_of_birth_04.press('Enter')
+        self._gender_04.select_option(fourth_traveler.gender)
+
+        first_child = travelers[4]
+        self._prefix_07.select_option(first_child.prefix)
+        self._first_name_07.fill(first_child.first_name)
+        self._last_name_07.fill(first_child.last_name)
+        self._date_of_birth_07.click()
+        self._date_of_birth_07.clear()
+        self._date_of_birth_07.type(first_child.date_of_birth)
+        self._date_of_birth_07.press('Enter')
+        self._gender_07.select_option(first_child.gender)
+
+        second_child = travelers[5]
+        self._prefix_08.select_option(second_child.prefix)
+        self._first_name_08.fill(second_child.first_name)
+        self._last_name_08.fill(second_child.last_name)
+        self._date_of_birth_08.click()
+        self._date_of_birth_08.clear()
+        self._date_of_birth_08.type(second_child.date_of_birth)
+        self._date_of_birth_08.press('Enter')
+        self._gender_08.select_option(second_child.gender)
 
         self._page.get_by_role("button", name="Save Travelers").click()
 
