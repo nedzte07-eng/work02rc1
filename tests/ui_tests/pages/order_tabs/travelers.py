@@ -137,7 +137,7 @@ class TravelersTab(DevgPage):
         self._date_of_birth_01.click()
         self._date_of_birth_01.clear()
         self._date_of_birth_01.type(first_traveler.date_of_birth)
-        self._date_of_birth_02.press('Enter')
+        self._date_of_birth_01.press('Enter')
         self._gender_01.select_option(first_traveler.gender)
 
 
@@ -164,7 +164,7 @@ class TravelersTab(DevgPage):
         self._date_of_birth_01.click()
         self._date_of_birth_01.clear()
         self._date_of_birth_01.type(first_traveler.date_of_birth)
-        self._date_of_birth_02.press('Enter')
+        self._date_of_birth_01.press('Enter')
         self._gender_01.select_option(first_traveler.gender)
 
 
@@ -211,7 +211,7 @@ class TravelersTab(DevgPage):
         self._date_of_birth_01.click()
         self._date_of_birth_01.clear()
         self._date_of_birth_01.type(first_traveler.date_of_birth)
-        self._date_of_birth_02.press('Enter')
+        self._date_of_birth_01.press('Enter')
         self._gender_01.select_option(first_traveler.gender)
 
 
@@ -258,7 +258,7 @@ class TravelersTab(DevgPage):
         self._date_of_birth_01.click()
         self._date_of_birth_01.clear()
         self._date_of_birth_01.type(first_traveler.date_of_birth)
-        self._date_of_birth_02.press('Enter')
+        self._date_of_birth_01.press('Enter')
         self._gender_01.select_option(first_traveler.gender)
 
 

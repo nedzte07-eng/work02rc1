@@ -151,8 +151,8 @@ class TestOrionRC101:
     # @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
     @pytest.mark.four_adults_two_children
     @allure.story("Creating an order")
-    @allure.title("Checking if user can create an order for 2 adults and 2 children")
-    @allure.description("Ensure if user can create an order for 2 adults and 2 children")
+    @allure.title("Checking if user can create an order for 4 adults and 2 children")
+    @allure.description("Ensure if user can create an order for 4 adults and 2 children")
     def test_create_order_four_adults_two_children(self, page):
         login = LogInPage(page)
 
