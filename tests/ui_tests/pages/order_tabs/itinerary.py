@@ -57,7 +57,7 @@ class ItineraryTab(DevgPage):
         return self._page.locator("div.text-quoted-price").first.inner_text()
 
     def delete_quoted_accommodation_service(self):
-        self._page.get_by_role("button", name="Show").click()
+        # self._page.get_by_role("button", name="Show").click()
 
         self._page.on("dialog", lambda dialog: dialog.accept())
         self._page.get_by_role("button", name="Delete Service").click()
