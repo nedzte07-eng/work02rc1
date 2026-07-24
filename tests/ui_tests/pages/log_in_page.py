@@ -13,7 +13,7 @@ class LogInPage:
         self._email_input = page.locator('input[name="email"]')
         self._password_input = page.locator('input[name="password"]')
         self._login = page.locator('button[type="submit"]')
-        self._ui_url = os.getenv("RC1_ORION") + "login"
+        self._ui_url = "login"
 
     def navigate(self):
         """Метод для переходу на сторінку"""
