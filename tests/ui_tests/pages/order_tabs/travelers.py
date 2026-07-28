@@ -31,90 +31,54 @@ class TravelersTab(DevgPage):
     def __init__(self, page: Page):
         super().__init__(page)
         self._counter = page.locator('a.nav-link[href="#travelers"] span.order-edit__counter')
-        # FIRST TRAVELER
+        # ROW 1
         self._radio_01 = page.locator('//tbody/tr[1]/td[1]//input[@type="radio"]')
         self._prefix_01 = page.locator('//tbody/tr[1]/td[2]//select[contains(@class,"traveler__select--prefix")]')
         self._first_name_01 = page.locator('//tbody/tr[1]/td[3]//input[@class="form-control traveler__name-input"]')
         self._middle_name_01 = page.locator('//tbody/tr[1]/td[4]//input[@class="form-control traveler__name-input"]')
-        self._last_name_01 = page.locator('//tbody/tr[1]/td[5]//input[@class="form-control traveler__name-input" and @value="Adult one"]')
-        # //tbody/tr[1]/td[6]//select[contains(@class,"traveler__select--suffix")]
+        self._last_name_01 = page.locator('//tbody/tr[1]/td[5]//input[@class="form-control traveler__name-input"]')
         self._date_of_birth_01 = page.locator('//tbody/tr[1]/td[7]//input[@placeholder="DD M YYYY"]')
-        # //tbody/tr[1]/td[8]
         self._gender_01 = page.locator('//tbody/tr[1]/td[9]//select[contains(@class,"traveler__select--gender")]')
-        # // tbody / tr[1] / td[10]
-        # // tbody / tr[1] / td[11]
-        # // tbody / tr[1] / td[12] // button[contains(text(), "Show")]
-        # // tbody / tr[1] / td[13] // button[contains(text(), "Assignments")]
-        # // tbody / tr[1] / td[14] // button[contains( @class ,"btn-danger")]
-        # SECOND TRAVELER
+        # ROW 2
         self._radio_02 = page.locator('//tbody/tr[2]/td[1]//input[@type="radio"]')
         self._prefix_02 = page.locator('//tbody/tr[2]/td[2]//select[contains(@class,"traveler__select--prefix")]')
         self._first_name_02 = page.locator('//tbody/tr[2]/td[3]//input[@class="form-control traveler__name-input"]')
         self._middle_name_02 = page.locator('//tbody/tr[2]/td[4]//input[@class="form-control traveler__name-input"]')
-        self._last_name_02 = page.locator('//tbody/tr[2]/td[5]//input[@class="form-control traveler__name-input" and @value="Adult two"]')
+        self._last_name_02 = page.locator('//tbody/tr[2]/td[5]//input[@class="form-control traveler__name-input"]')
         self._date_of_birth_02 = page.locator('//tbody/tr[2]/td[7]//input[@placeholder="DD M YYYY"]')
         self._gender_02 = page.locator('//tbody/tr[2]/td[9]//select[contains(@class,"traveler__select--gender")]')
-
-        # THIRD TRAVELER
+        # ROW 3 (adult 3 in 4A scenarios; child 1 in 2A+2C scenario)
         self._radio_03 = page.locator('//tbody/tr[3]/td[1]//input[@type="radio"]')
         self._prefix_03 = page.locator('//tbody/tr[3]/td[2]//select[contains(@class,"traveler__select--prefix")]')
         self._first_name_03 = page.locator('//tbody/tr[3]/td[3]//input[@class="form-control traveler__name-input"]')
         self._middle_name_03 = page.locator('//tbody/tr[3]/td[4]//input[@class="form-control traveler__name-input"]')
-        self._last_name_03 = page.locator(
-            '//tbody/tr[3]/td[5]//input[@class="form-control traveler__name-input" and @value="Adult three"]')
+        self._last_name_03 = page.locator('//tbody/tr[3]/td[5]//input[@class="form-control traveler__name-input"]')
         self._date_of_birth_03 = page.locator('//tbody/tr[3]/td[7]//input[@placeholder="DD M YYYY"]')
         self._gender_03 = page.locator('//tbody/tr[3]/td[9]//select[contains(@class,"traveler__select--gender")]')
-
-        # FOURTH TRAVELER
+        # ROW 4 (adult 4 in 4A scenarios; child 2 in 2A+2C scenario)
         self._radio_04 = page.locator('//tbody/tr[4]/td[1]//input[@type="radio"]')
         self._prefix_04 = page.locator('//tbody/tr[4]/td[2]//select[contains(@class,"traveler__select--prefix")]')
         self._first_name_04 = page.locator('//tbody/tr[4]/td[3]//input[@class="form-control traveler__name-input"]')
         self._middle_name_04 = page.locator('//tbody/tr[4]/td[4]//input[@class="form-control traveler__name-input"]')
-        self._last_name_04 = page.locator(
-            '//tbody/tr[4]/td[5]//input[@class="form-control traveler__name-input" and @value="Adult four"]')
+        self._last_name_04 = page.locator('//tbody/tr[4]/td[5]//input[@class="form-control traveler__name-input"]')
         self._date_of_birth_04 = page.locator('//tbody/tr[4]/td[7]//input[@placeholder="DD M YYYY"]')
         self._gender_04 = page.locator('//tbody/tr[4]/td[9]//select[contains(@class,"traveler__select--gender")]')
-
-
-        #FIRST CHILD
-        self._radio_05 = page.locator('//tbody/tr[3]/td[1]//input[@type="radio"]')
-        self._prefix_05 = page.locator('//tbody/tr[3]/td[2]//select[contains(@class,"traveler__select--prefix")]')
-        self._first_name_05 = page.locator('//tbody/tr[3]/td[3]//input[@class="form-control traveler__name-input"]')
-        self._middle_name_05 = page.locator('//tbody/tr[3]/td[4]//input[@class="form-control traveler__name-input"]')
-        self._last_name_05 = page.locator(
-            '//tbody/tr[3]/td[5]//input[@class="form-control traveler__name-input" and @value="Child three"]')
-        self._date_of_birth_05 = page.locator('//tbody/tr[3]/td[7]//input[@placeholder="DD M YYYY"]')
-        self._gender_05 = page.locator('//tbody/tr[3]/td[9]//select[contains(@class,"traveler__select--gender")]')
-
-        # SECOND CHILD
-        self._radio_06 = page.locator('//tbody/tr[4]/td[1]//input[@type="radio"]')
-        self._prefix_06 = page.locator('//tbody/tr[4]/td[2]//select[contains(@class,"traveler__select--prefix")]')
-        self._first_name_06 = page.locator('//tbody/tr[4]/td[3]//input[@class="form-control traveler__name-input"]')
-        self._middle_name_06 = page.locator('//tbody/tr[4]/td[4]//input[@class="form-control traveler__name-input"]')
-        self._last_name_06 = page.locator(
-            '//tbody/tr[4]/td[5]//input[@class="form-control traveler__name-input" and @value="Child four"]')
-        self._date_of_birth_06 = page.locator('//tbody/tr[4]/td[7]//input[@placeholder="DD M YYYY"]')
-        self._gender_06 = page.locator('//tbody/tr[4]/td[9]//select[contains(@class,"traveler__select--gender")]')
-
-        # FIRST CHILD_FOR_FOUR_ADULTS
-        self._radio_07 = page.locator('//tbody/tr[5]/td[1]//input[@type="radio"]')
-        self._prefix_07 = page.locator('//tbody/tr[5]/td[2]//select[contains(@class,"traveler__select--prefix")]')
-        self._first_name_07 = page.locator('//tbody/tr[5]/td[3]//input[@class="form-control traveler__name-input"]')
-        self._middle_name_07 = page.locator('//tbody/tr[5]/td[4]//input[@class="form-control traveler__name-input"]')
-        self._last_name_07 = page.locator(
-            '//tbody/tr[5]/td[5]//input[@class="form-control traveler__name-input" and @value="Child five"]')
-        self._date_of_birth_07 = page.locator('//tbody/tr[5]/td[7]//input[@placeholder="DD M YYYY"]')
-        self._gender_07 = page.locator('//tbody/tr[5]/td[9]//select[contains(@class,"traveler__select--gender")]')
-
-        # SECOND CHILD_FOR_FOUR_ADULTS
-        self._radio_08 = page.locator('//tbody/tr[6]/td[1]//input[@type="radio"]')
-        self._prefix_08 = page.locator('//tbody/tr[6]/td[2]//select[contains(@class,"traveler__select--prefix")]')
-        self._first_name_08 = page.locator('//tbody/tr[6]/td[3]//input[@class="form-control traveler__name-input"]')
-        self._middle_name_08 = page.locator('//tbody/tr[6]/td[4]//input[@class="form-control traveler__name-input"]')
-        self._last_name_08 = page.locator(
-            '//tbody/tr[6]/td[5]//input[@class="form-control traveler__name-input" and @value="Child six"]')
-        self._date_of_birth_08 = page.locator('//tbody/tr[6]/td[7]//input[@placeholder="DD M YYYY"]')
-        self._gender_08 = page.locator('//tbody/tr[6]/td[9]//select[contains(@class,"traveler__select--gender")]')
+        # ROW 5 (child 1 in 4A+2C scenario)
+        self._radio_05 = page.locator('//tbody/tr[5]/td[1]//input[@type="radio"]')
+        self._prefix_05 = page.locator('//tbody/tr[5]/td[2]//select[contains(@class,"traveler__select--prefix")]')
+        self._first_name_05 = page.locator('//tbody/tr[5]/td[3]//input[@class="form-control traveler__name-input"]')
+        self._middle_name_05 = page.locator('//tbody/tr[5]/td[4]//input[@class="form-control traveler__name-input"]')
+        self._last_name_05 = page.locator('//tbody/tr[5]/td[5]//input[@class="form-control traveler__name-input"]')
+        self._date_of_birth_05 = page.locator('//tbody/tr[5]/td[7]//input[@placeholder="DD M YYYY"]')
+        self._gender_05 = page.locator('//tbody/tr[5]/td[9]//select[contains(@class,"traveler__select--gender")]')
+        # ROW 6 (child 2 in 4A+2C scenario)
+        self._radio_06 = page.locator('//tbody/tr[6]/td[1]//input[@type="radio"]')
+        self._prefix_06 = page.locator('//tbody/tr[6]/td[2]//select[contains(@class,"traveler__select--prefix")]')
+        self._first_name_06 = page.locator('//tbody/tr[6]/td[3]//input[@class="form-control traveler__name-input"]')
+        self._middle_name_06 = page.locator('//tbody/tr[6]/td[4]//input[@class="form-control traveler__name-input"]')
+        self._last_name_06 = page.locator('//tbody/tr[6]/td[5]//input[@class="form-control traveler__name-input"]')
+        self._date_of_birth_06 = page.locator('//tbody/tr[6]/td[7]//input[@placeholder="DD M YYYY"]')
+        self._gender_06 = page.locator('//tbody/tr[6]/td[9]//select[contains(@class,"traveler__select--gender")]')
 
 
 
@@ -154,8 +118,8 @@ class TravelersTab(DevgPage):
         travelers = load_travelers()
         self._fill_traveler(self._prefix_01, self._first_name_01, self._last_name_01, self._date_of_birth_01, self._gender_01, travelers[0])
         self._fill_traveler(self._prefix_02, self._first_name_02, self._last_name_02, self._date_of_birth_02, self._gender_02, travelers[1])
-        self._fill_traveler(self._prefix_05, self._first_name_05, self._last_name_05, self._date_of_birth_05, self._gender_05, travelers[4])
-        self._fill_traveler(self._prefix_06, self._first_name_06, self._last_name_06, self._date_of_birth_06, self._gender_06, travelers[5])
+        self._fill_traveler(self._prefix_03, self._first_name_03, self._last_name_03, self._date_of_birth_03, self._gender_03, travelers[4])
+        self._fill_traveler(self._prefix_04, self._first_name_04, self._last_name_04, self._date_of_birth_04, self._gender_04, travelers[5])
         self._page.get_by_role("button", name="Save Travelers").click()
 
     def set_4_adults_2_children(self):
@@ -164,6 +128,6 @@ class TravelersTab(DevgPage):
         self._fill_traveler(self._prefix_02, self._first_name_02, self._last_name_02, self._date_of_birth_02, self._gender_02, travelers[1])
         self._fill_traveler(self._prefix_03, self._first_name_03, self._last_name_03, self._date_of_birth_03, self._gender_03, travelers[2])
         self._fill_traveler(self._prefix_04, self._first_name_04, self._last_name_04, self._date_of_birth_04, self._gender_04, travelers[3])
-        self._fill_traveler(self._prefix_07, self._first_name_07, self._last_name_07, self._date_of_birth_07, self._gender_07, travelers[4])
-        self._fill_traveler(self._prefix_08, self._first_name_08, self._last_name_08, self._date_of_birth_08, self._gender_08, travelers[5])
+        self._fill_traveler(self._prefix_05, self._first_name_05, self._last_name_05, self._date_of_birth_05, self._gender_05, travelers[4])
+        self._fill_traveler(self._prefix_06, self._first_name_06, self._last_name_06, self._date_of_birth_06, self._gender_06, travelers[5])
         self._page.get_by_role("button", name="Save Travelers").click()
