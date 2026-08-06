@@ -49,7 +49,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_2_adults('2026-10-01', '2026-10-05')
+                devg_page = order_create_page.create_gvv_with_2_adults('2026-12-01', '2026-12-05')
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -89,7 +89,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_4_adults('2026-10-01', '2026-10-05')
+                devg_page = order_create_page.create_gvv_with_4_adults('2026-12-01', '2026-12-05')
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -129,7 +129,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_2_adults_2_children('2026-10-01', '2026-10-05')
+                devg_page = order_create_page.create_gvv_with_2_adults_2_children('2026-12-01', '2026-12-05')
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -169,7 +169,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_4_adults_2_children('2026-10-01', '2026-10-05')
+                devg_page = order_create_page.create_gvv_with_4_adults_2_children('2026-12-01', '2026-12-05')
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
