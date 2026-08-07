@@ -49,7 +49,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_2_adults('2026-10-01', '2026-10-05')
+                devg_page = order_create_page.create_gvv_with_2_adults('2026-12-01', '2026-12-05')
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -89,7 +89,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_4_adults('2026-10-01', '2026-10-05')
+                devg_page = order_create_page.create_gvv_with_4_adults('2026-12-01', '2026-12-05')
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -129,7 +129,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_2_adults_2_children('2026-10-01', '2026-10-05')
+                devg_page = order_create_page.create_gvv_with_2_adults_2_children('2026-12-01', '2026-12-05')
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -147,6 +147,46 @@ class TestOrionRC101:
                 )
             with allure.step("Assert that travellers counter is 4"):
                 assert travelers_tab.get_counter_value() == "4"
+
+    # @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
+    @pytest.mark.two_adults_one_child
+    @allure.story("Creating an order")
+    @allure.title("Checking if user can create an order for 2 adults and 1 child")
+    @allure.description("Ensure if user can create an order for 2 adults and 1 child")
+    def test_create_order_two_adults_one_child(self, page):
+        login = LogInPage(page)
+
+        admin_page = login.navigate().login(self.RC1_ORION_EMAIL, self.RC1_ORION_PASSWORD)
+        with allure.step("Creating an order for 2 adults and 1 child"):
+            with allure.step("Assert that the user is logged in"):
+                expect(admin_page.get_logo()).to_contain_text("Orion")
+
+                order_page = admin_page.order_link_click()
+            with allure.step("Assert that we on the Order page"):
+                expect(order_page.get_title()).to_contain_text("Order")
+
+                order_create_page = order_page.create_button_click()
+            with allure.step("Assert that we on the Order Create page"):
+                expect(order_create_page.get_title()).to_contain_text("New Order")
+
+                devg_page = order_create_page.create_gvv_with_2_adults_1_child('2026-12-01', '2026-12-05')
+            with allure.step("Assert that we created DEVG order"):
+                expect(devg_page.get_title()).to_contain_text("DEVG")
+
+                travelers_tab = TravelersTab(page)
+                travelers_tab.click_travelers()
+                travelers_tab.set_2_adults_1_child()
+
+            with allure.step("Assert that we on Travellers tab"):
+                expect(travelers_tab.get_save_travelers()).to_contain_text("Travelers")
+                screenshot = travelers_tab.get_save_travelers().screenshot()
+                allure.attach(
+                    screenshot,
+                    name="Save Travelers button",
+                    attachment_type=allure.attachment_type.PNG
+                )
+            with allure.step("Assert that travellers counter is 3"):
+                assert travelers_tab.get_counter_value() == "3"
 
     # @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
     @pytest.mark.four_adults_two_children
@@ -169,7 +209,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_4_adults_2_children('2026-10-01', '2026-10-05')
+                devg_page = order_create_page.create_gvv_with_4_adults_2_children('2026-12-01', '2026-12-05')
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
