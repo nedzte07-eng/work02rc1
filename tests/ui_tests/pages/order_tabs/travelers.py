@@ -114,6 +114,13 @@ class TravelersTab(DevgPage):
         self._fill_traveler(self._prefix_04, self._first_name_04, self._last_name_04, self._date_of_birth_04, self._gender_04, travelers[3])
         self._page.get_by_role("button", name="Save Travelers").click()
 
+    def set_2_adults_1_child(self):
+        travelers = load_travelers()
+        self._fill_traveler(self._prefix_01, self._first_name_01, self._last_name_01, self._date_of_birth_01, self._gender_01, travelers[0])
+        self._fill_traveler(self._prefix_02, self._first_name_02, self._last_name_02, self._date_of_birth_02, self._gender_02, travelers[1])
+        self._fill_traveler(self._prefix_03, self._first_name_03, self._last_name_03, self._date_of_birth_03, self._gender_03, travelers[4])
+        self._page.get_by_role("button", name="Save Travelers").click()
+
     def set_2_adults_2_children(self):
         travelers = load_travelers()
         self._fill_traveler(self._prefix_01, self._first_name_01, self._last_name_01, self._date_of_birth_01, self._gender_01, travelers[0])
