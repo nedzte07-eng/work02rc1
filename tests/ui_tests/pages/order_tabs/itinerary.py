@@ -38,12 +38,12 @@ class ItineraryTab(DevgPage):
 
         self._page.get_by_role("textbox", name="YYYY-MM-DD").first.click()
         self._page.get_by_role("textbox", name="YYYY-MM-DD").first.clear()
-        self._page.get_by_role("textbox", name="YYYY-MM-DD").first.type('2026-07-20')
+        self._page.get_by_role("textbox", name="YYYY-MM-DD").first.type('2026-10-20')
         self._page.get_by_role("textbox", name="YYYY-MM-DD").first.press('Enter')
 
         self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).click()
         self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).clear()
-        self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).type('2026-07-25')
+        self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).type('2026-10-25')
         self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).press('Enter')
         self._page.get_by_role("button").filter(has_text=re.compile(r"^$")).click()
         self._page.get_by_text("The Alex Hotel").click()
