@@ -16,6 +16,8 @@ class TestOrionRC101:
     RC1_ORION_BASIC_USER = os.getenv('RC1_ORION_BASIC_USER')
     RC1_ORION_BASIC_PASS = os.getenv('RC1_ORION_BASIC_PASS')
     TEST_ORDER_ID = os.getenv('RC1_ORION_TEST_ORDER')
+    RC1_START_DATE = os.getenv('RC1_START_DATE')
+    RC1_END_DATE = os.getenv('RC1_END_DATE')
 
     @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
     @allure.story("Log in to Orion")
@@ -49,7 +51,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_2_adults('2026-12-01', '2026-12-05')
+                devg_page = order_create_page.create_gvv_with_2_adults(self.RC1_START_DATE, self.RC1_END_DATE)
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -89,7 +91,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_4_adults('2026-12-01', '2026-12-05')
+                devg_page = order_create_page.create_gvv_with_4_adults(self.RC1_START_DATE, self.RC1_END_DATE)
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -129,7 +131,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_2_adults_2_children('2026-12-01', '2026-12-05')
+                devg_page = order_create_page.create_gvv_with_2_adults_2_children(self.RC1_START_DATE, self.RC1_END_DATE)
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -169,7 +171,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_2_adults_1_child('2026-12-01', '2026-12-05')
+                devg_page = order_create_page.create_gvv_with_2_adults_1_child(self.RC1_START_DATE, self.RC1_END_DATE)
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -209,7 +211,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_4_adults_2_children('2026-12-01', '2026-12-05')
+                devg_page = order_create_page.create_gvv_with_4_adults_2_children(self.RC1_START_DATE, self.RC1_END_DATE)
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
