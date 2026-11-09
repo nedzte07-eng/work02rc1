@@ -1,10 +1,13 @@
 import re
+import os
 
 from playwright.sync_api import Page, expect, Dialog
 from tests.ui_tests.pages.devg_page import DevgPage
 
 
 class ItineraryTab(DevgPage):
+    RC1_START_DATE = os.getenv('RC1_START_DATE')
+    RC1_END_DATE = os.getenv('RC1_END_DATE')
 
     def __init__(self, page: Page):
         super().__init__(page)
@@ -38,16 +41,16 @@ class ItineraryTab(DevgPage):
 
         self._page.get_by_role("textbox", name="YYYY-MM-DD").first.click()
         self._page.get_by_role("textbox", name="YYYY-MM-DD").first.clear()
-        self._page.get_by_role("textbox", name="YYYY-MM-DD").first.type('2026-10-20')
+        self._page.get_by_role("textbox", name="YYYY-MM-DD").first.type(self.RC1_START_DATE)
         self._page.get_by_role("textbox", name="YYYY-MM-DD").first.press('Enter')
 
         self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).click()
         self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).clear()
-        self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).type('2026-10-25')
+        self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).type(self.RC1_END_DATE)
         self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).press('Enter')
         self._page.get_by_role("button").filter(has_text=re.compile(r"^$")).click()
-        self._page.get_by_text("The Alex Hotel").click()
-        sell_value_in_modal = self._page.locator("//tr[@class='table-row__hover']/td[5]").inner_text()
+        self._page.get_by_text("Bonnington").click()
+        sell_value_in_modal = self._page.locator("//tr[contains(@class, 'table-row__hover')]/td[5]").inner_text()
         self._page.on("dialog", lambda dialog: dialog.accept())
         self._page.locator("button.btn-warning.btn-block").click()
         self._page.get_by_role("button", name="Close").click()

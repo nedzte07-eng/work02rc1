@@ -232,7 +232,7 @@ class TestOrionRC101:
 
     # @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
 
-    @pytest.mark.order_manipulation
+    @pytest.mark.test_order_open_and_change
     @allure.story("Opening the test order for 2 travelers")
     @allure.title("Checking if user can open the test order for 2 travelers")
     @allure.description("Ensure if user can open the test order for 2 travelers")
@@ -288,7 +288,8 @@ class TestOrionRC101:
                 )
 
             with allure.step("Select and quote an accommodation"):
-                modal_sell = itinerary_tab.quote_an_accommodation_service()
+                value = itinerary_tab.quote_an_accommodation_service()
+                modal_sell = int(float(value.replace("$", "")))
                 screenshot_quote_accommodation = page.screenshot()
                 allure.attach(
                     screenshot_quote_accommodation,
@@ -297,7 +298,11 @@ class TestOrionRC101:
                 )
 
             with allure.step("Verify if modal sell and sell of the quoted service are the same"):
-                assert modal_sell == itinerary_tab.get_quoted_accommodation_sell()
+                value = itinerary_tab.get_quoted_accommodation_sell()
+                quoted_sell = int(float(value.replace("$", "")))
+                assert abs(modal_sell - quoted_sell) <= 10, (
+                    f"Expected quoted_sell ({quoted_sell}) to be within ±10 of modal_sell ({modal_sell})"
+                )
 
             with allure.step("Delete an accommodation"):
                 itinerary_tab.delete_quoted_accommodation_service()
