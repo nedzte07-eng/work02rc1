@@ -36,8 +36,8 @@ class ItineraryTab(DevgPage):
     def quote_an_accommodation_service(self):
         self._page.locator(
             ".form-row > div:nth-child(2) > .form-field__editor > .css-b62m3t-container > .react-select__control > .react-select__value-container").click()
-        self._page.locator("#react-select-5-input").fill("dub")
-        self._page.get_by_role("option", name="Ireland / Dublin").click()
+        self._page.locator("#react-select-5-input").fill("lon")
+        self._page.get_by_role("option", name="England / London").click()
 
         self._page.get_by_role("textbox", name="YYYY-MM-DD").first.click()
         self._page.get_by_role("textbox", name="YYYY-MM-DD").first.clear()
@@ -49,7 +49,8 @@ class ItineraryTab(DevgPage):
         self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).type(self.RC1_END_DATE)
         self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).press('Enter')
         self._page.get_by_role("button").filter(has_text=re.compile(r"^$")).click()
-        self._page.get_by_text("Bonnington").click()
+        self._page.get_by_role("link", name="HotelBeds").click()
+        self._page.get_by_text("President").click()
         sell_value_in_modal = self._page.locator("//tr[contains(@class, 'table-row__hover')]/td[5]").inner_text()
         self._page.on("dialog", lambda dialog: dialog.accept())
         self._page.locator("button.btn-warning.btn-block").click()
