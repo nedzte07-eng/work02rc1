@@ -288,7 +288,7 @@ class TestOrionRC101:
                 )
 
             with allure.step("Select and quote an accommodation"):
-                value = itinerary_tab.quote_an_accommodation_service()
+                value = itinerary_tab.quote_an_accommodation_service('HotelBeds', 'Lon', self.RC1_START_DATE, self.RC1_END_DATE)
                 modal_sell = int(float(value.replace("$", "")))
                 screenshot_quote_accommodation = page.screenshot()
                 allure.attach(
