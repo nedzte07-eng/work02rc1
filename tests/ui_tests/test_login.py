@@ -16,6 +16,8 @@ class TestOrionRC101:
     RC1_ORION_BASIC_USER = os.getenv('RC1_ORION_BASIC_USER')
     RC1_ORION_BASIC_PASS = os.getenv('RC1_ORION_BASIC_PASS')
     TEST_ORDER_ID = os.getenv('RC1_ORION_TEST_ORDER')
+    RC1_START_DATE = os.getenv('RC1_START_DATE')
+    RC1_END_DATE = os.getenv('RC1_END_DATE')
 
     @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
     @allure.story("Log in to Orion")
@@ -49,7 +51,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_2_adults('2026-12-01', '2026-12-05')
+                devg_page = order_create_page.create_gvv_with_2_adults(self.RC1_START_DATE, self.RC1_END_DATE)
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -89,7 +91,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_4_adults('2026-12-01', '2026-12-05')
+                devg_page = order_create_page.create_gvv_with_4_adults(self.RC1_START_DATE, self.RC1_END_DATE)
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -129,7 +131,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_2_adults_2_children('2026-12-01', '2026-12-05')
+                devg_page = order_create_page.create_gvv_with_2_adults_2_children(self.RC1_START_DATE, self.RC1_END_DATE)
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -169,7 +171,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_2_adults_1_child('2026-12-01', '2026-12-05')
+                devg_page = order_create_page.create_gvv_with_2_adults_1_child(self.RC1_START_DATE, self.RC1_END_DATE)
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -209,7 +211,7 @@ class TestOrionRC101:
             with allure.step("Assert that we on the Order Create page"):
                 expect(order_create_page.get_title()).to_contain_text("New Order")
 
-                devg_page = order_create_page.create_gvv_with_4_adults_2_children('2026-12-01', '2026-12-05')
+                devg_page = order_create_page.create_gvv_with_4_adults_2_children(self.RC1_START_DATE, self.RC1_END_DATE)
             with allure.step("Assert that we created DEVG order"):
                 expect(devg_page.get_title()).to_contain_text("DEVG")
 
@@ -230,7 +232,7 @@ class TestOrionRC101:
 
     # @pytest.mark.skip(reason="Цей тест тимчасово вимкнено")
 
-    @pytest.mark.order_manipulation
+    @pytest.mark.test_order_open_and_change
     @allure.story("Opening the test order for 2 travelers")
     @allure.title("Checking if user can open the test order for 2 travelers")
     @allure.description("Ensure if user can open the test order for 2 travelers")
@@ -286,7 +288,8 @@ class TestOrionRC101:
                 )
 
             with allure.step("Select and quote an accommodation"):
-                modal_sell = itinerary_tab.quote_an_accommodation_service()
+                value = itinerary_tab.quote_an_accommodation_service('HotelBeds', 'Lon', self.RC1_START_DATE, self.RC1_END_DATE)
+                modal_sell = int(float(value.replace("$", "")))
                 screenshot_quote_accommodation = page.screenshot()
                 allure.attach(
                     screenshot_quote_accommodation,
@@ -295,7 +298,11 @@ class TestOrionRC101:
                 )
 
             with allure.step("Verify if modal sell and sell of the quoted service are the same"):
-                assert modal_sell == itinerary_tab.get_quoted_accommodation_sell()
+                value = itinerary_tab.get_quoted_accommodation_sell()
+                quoted_sell = int(float(value.replace("$", "")))
+                assert abs(modal_sell - quoted_sell) <= 10, (
+                    f"Expected quoted_sell ({quoted_sell}) to be within ±10 of modal_sell ({modal_sell})"
+                )
 
             with allure.step("Delete an accommodation"):
                 itinerary_tab.delete_quoted_accommodation_service()

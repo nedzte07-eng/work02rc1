@@ -9,7 +9,7 @@ class ItineraryTab(DevgPage):
     def __init__(self, page: Page):
         super().__init__(page)
         self._button_add_service = page.get_by_role("button", name="Add Service")
-        self._modal_add_service = page.locator("div.modal-content").nth(1)
+        self._modal_add_service = page.locator("div.modal-content").nth(2)
         self._modal_add_service_title = page.locator('div.m-0.modal-title.h4')
         self._delete_service_notification = page.locator('//div[contains(@class,"Toastify__toast-body")]')
 
@@ -30,24 +30,25 @@ class ItineraryTab(DevgPage):
     def get_delete_service_notification(self):
         return self._delete_service_notification
 
-    def quote_an_accommodation_service(self):
+    def quote_an_accommodation_service(self, supplier_tab, location, start_date, end_date):
         self._page.locator(
             ".form-row > div:nth-child(2) > .form-field__editor > .css-b62m3t-container > .react-select__control > .react-select__value-container").click()
-        self._page.locator("#react-select-5-input").fill("dub")
-        self._page.get_by_role("option", name="Ireland / Dublin").click()
+        self._page.locator("#react-select-5-input").fill(location)
+        self._page.get_by_role("option", name="England / London").click()
 
         self._page.get_by_role("textbox", name="YYYY-MM-DD").first.click()
         self._page.get_by_role("textbox", name="YYYY-MM-DD").first.clear()
-        self._page.get_by_role("textbox", name="YYYY-MM-DD").first.type('2026-10-20')
+        self._page.get_by_role("textbox", name="YYYY-MM-DD").first.type(start_date)
         self._page.get_by_role("textbox", name="YYYY-MM-DD").first.press('Enter')
 
         self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).click()
         self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).clear()
-        self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).type('2026-10-25')
+        self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).type(end_date)
         self._page.get_by_role("textbox", name="YYYY-MM-DD").nth(1).press('Enter')
         self._page.get_by_role("button").filter(has_text=re.compile(r"^$")).click()
-        self._page.get_by_text("The Alex Hotel").click()
-        sell_value_in_modal = self._page.locator("//tr[@class='table-row__hover']/td[5]").inner_text()
+        self._page.get_by_role("link", name=supplier_tab).click()
+        self._page.get_by_text("President").click()
+        sell_value_in_modal = self._page.locator("//tr[contains(@class, 'table-row__hover')]/td[5]").inner_text()
         self._page.on("dialog", lambda dialog: dialog.accept())
         self._page.locator("button.btn-warning.btn-block").click()
         self._page.get_by_role("button", name="Close").click()
@@ -59,8 +60,10 @@ class ItineraryTab(DevgPage):
     def delete_quoted_accommodation_service(self):
         # self._page.get_by_role("button", name="Show").click()
 
-        self._page.on("dialog", lambda dialog: dialog.accept())
+        # self._page.on("dialog", lambda dialog: dialog.accept())
         self._page.get_by_role("button", name="Delete Service").click()
+
+        self._page.get_by_role("button", name="Confirm").click()
 
         self._page.wait_for_timeout(1000)
 
